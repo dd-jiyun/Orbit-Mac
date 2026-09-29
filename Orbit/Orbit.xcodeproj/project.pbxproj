@@ -10,6 +10,10 @@
 		5689BAFA2FA5003B00A9185B /* Orbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXBuildFile section */
+		5689BC012FA5003B00A9185B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 5689BC032FA5003B00A9185B /* Sparkle */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5689BAFC2FA5003B00A9185B /* Orbit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5689BC012FA5003B00A9185B /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = Orbit;
 			packageProductDependencies = (
+				5689BC032FA5003B00A9185B /* Sparkle */,
 			);
 			productName = Orbit;
 			productReference = 5689BAFA2FA5003B00A9185B /* Orbit.app */;
@@ -98,6 +104,9 @@
 			productRefGroup = 5689BAFB2FA5003B00A9185B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
+			packageReferences = (
+				5689BC022FA5003B00A9185B /* XCRemoteSwiftPackageReference \"Sparkle\" */,
+			);
 			targets = (
 				5689BAF92FA5003B00A9185B /* Orbit */,
 			);
@@ -257,6 +266,8 @@
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_KEY_SUFeedURL = "";
+				INFOPLIST_KEY_SUPublicEDKey = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -283,6 +294,8 @@
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_KEY_SUFeedURL = "";
+				INFOPLIST_KEY_SUPublicEDKey = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -296,6 +309,25 @@
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5689BC022FA5003B00A9185B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5689BC032FA5003B00A9185B /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5689BC022FA5003B00A9185B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCConfigurationList section */
 		5689BAF52FA5003B00A9185B /* Build configuration list for PBXProject "Orbit" */ = {

@@ -1,8 +1,27 @@
 import Cocoa
+import Sparkle
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
     private let keyTap = KeyTap()
+    private lazy var updaterController: SPUStandardUpdaterController? = {
+        guard Self.hasUpdaterConfiguration else { return nil }
+        return SPUStandardUpdaterController(
+            startingUpdater: true,
+            updaterDelegate: nil,
+            userDriverDelegate: nil
+        )
+    }()
+
+    private static var hasUpdaterConfiguration: Bool {
+        guard
+            let feedURL = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String,
+            let publicKey = Bundle.main.object(forInfoDictionaryKey: "SUPublicEDKey") as? String
+        else {
+            return false
+        }
+        return !feedURL.isEmpty && !publicKey.isEmpty
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusBar()
@@ -25,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(numberOverlayToggleItem())
         menu.addItem(numberKeyToggleItem())
         menu.addItem(NSMenuItem.separator())
+        menu.addItem(updateCheckItem())
         menu.addItem(NSMenuItem(title: "로그 보기", action: #selector(openLog), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "종료", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
@@ -70,6 +90,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return item
     }
 
+    private func updateCheckItem() -> NSMenuItem {
+        let item = NSMenuItem(title: "업데이트 확인…", action: #selector(checkForUpdates(_:)), keyEquivalent: "")
+        item.target = self
+        item.isEnabled = updaterController != nil
+        return item
+    }
+
     @objc private func toggleNumberKey(_ sender: NSMenuItem) {
         NumberKeySettings.shared.isEnabled.toggle()
         sender.state = NumberKeySettings.shared.isEnabled ? .on : .off
@@ -93,5 +120,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let logPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Logs/Orbit.log")
         NSWorkspace.shared.open(logPath)
+    }
+
+    @objc private func checkForUpdates(_ sender: Any?) {
+        updaterController?.checkForUpdates(sender)
     }
 }
